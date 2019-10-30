@@ -75,7 +75,7 @@ const Spotify = {
             {
                headers: headers,
                method: 'POST',
-               body: JSON.stringify({uris: trackUris});
+               body: JSON.stringify({uris: trackUris})
 
             })
          })
