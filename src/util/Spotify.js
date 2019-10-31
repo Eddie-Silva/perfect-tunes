@@ -1,5 +1,5 @@
-const clientId = "97dcbb8931e14f4388c8ae9b3c1f3362"
-const redirectUir = "http://localhost:3000/"
+const clientId = "97dcbb8931e14f4388c8ae9b3c1f3362";
+const redirectUri = "http://localhost:3000";
 
 let accessToken;
 
@@ -11,11 +11,11 @@ const Spotify = {
       }
 
       //check for access token match
-      const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/)
-      const expiresInMatch = windwo.location.href.match(/expires_in=([^&]*)/)
+      const accessTokenMatch = window.location.href.match(/#access_token=([^&]*)/);
+      const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
 
       if (accessTokenMatch && expiresInMatch) {
-         accessToken = accessTokenMatch [1];
+         accessToken = accessTokenMatch[1];
          const expiresIn = Number(expiresInMatch[1]);
 
          //clear the parameters to allow for new access token when it expires
@@ -23,17 +23,20 @@ const Spotify = {
          window.history.pushState("Access Token", null, "/");
          return accessToken
       } else {
-         const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientID}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`
+         const accessUrl = "https://accounts.spotify.com/authorize?client_id=" + clientId + "&response_type=token&scope=playlist-modify-public&redirect_uri=" + redirectUri;
          window.location = accessUrl
+         
       }
    }, 
 
    search(term) {
       const accessToken = Spotify.getAccessToken();
-      return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
+      
+      return fetch("https://api.spotify.com/v1/search?type=track&q=" + term, {
          headers: {
-            Authorization:`Bearer ${accessToken}`
+            Authorization: "Bearer " + accessToken
          }
+         
       }).then(response => {
          return response.json();
       }).then(jsonResponse => {
@@ -56,14 +59,14 @@ const Spotify = {
       }
 
       const accessToken = Spotify.getAccessToken();
-      const headers = {Authorization: `Bearer ${accessToken}`};
+      const headers = {Authorization: "Bearer " + accessToken};
       let userId;
 
       return fetch('https://api.spotify.com/v1/me', {headers: headers}
       ).then(response => response.json()
       ).then(jsonResponse => {
          userId = jsonResponse.id;
-         return fetch(`https://api.spotify.com/v1/users/${userID}/playlists`,
+         return fetch("https://api.spotify.com/v1/users/" + userId + "/playlists",
          {
             headers: headers,
             method: 'POST',
@@ -71,7 +74,7 @@ const Spotify = {
          }).then(response => response.json()
          ).then(jsonResponse => {
             const playlistId = jsonResponse.id;
-            return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`,
+            return fetch("https://api.spotify.com/v1/users/$" + userId + "/playlists/" + playlistId + "/tracks",
             {
                headers: headers,
                method: 'POST',

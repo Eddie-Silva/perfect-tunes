@@ -26,16 +26,21 @@ h2 {
   font-size: 1.55rem;
 }
 
+button:focus {
+    outline: none;
+    border: none;
+}
+
 .App {
   height: 100%;
   padding: 0 17% 10% 17%;
-  background-image: url('https://s3.amazonaws.com/codecademy-content/programs/react/jammming/background_photo_desktop.jpg');
+  background-color: rgba(0, 255, 149);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   font-family: 'Work Sans', sans-serif;
   font-weight: 500;
-  color: #fff;
+  
 }
 
 .App-playlist {
