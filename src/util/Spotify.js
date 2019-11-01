@@ -1,5 +1,5 @@
-const clientId = "97dcbb8931e14f4388c8ae9b3c1f3362";
-const redirectUri = "http://localhost:3000";
+const clientId = process.env.REACT_APP_STUFF;
+const redirectUri = "http://perfect-tunes.surge.sh";
 
 let accessToken;
 
